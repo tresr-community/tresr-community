@@ -27,6 +27,11 @@ contact_info:
     action: "https://discord.com/invite/RgeRcF75JV"
     icon: "tf-chat"
 
+  - name: "Chat"
+    id: "Chat with Ron Jay"
+    action: "https://chat.nftreasure.community"
+    icon: "tf-chat"
+
 #########################
 # Socials
 #########################
