@@ -1,11 +1,23 @@
 [default]
 
 locale = "en-au"
-
 extend-ignore-re = [
     "TRESR",
     "SMRTR",
 ]
+
+[default.extend-words]
+
+center = "center"
+customizations = "customizations"
+customizing = "customizing"
+humanize = "humanize"
+maximize = "maximize"
+maximizes = "maximizes"
+maximizing = "maximizing"
+prioritizing = "prioritizing"
+recognize = "recognize"
+synchronize = "synchronize"
 
 [files]
 

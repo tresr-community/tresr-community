@@ -12,7 +12,7 @@ next_page: "/strategies/the-trader"
 
 #### Thesis
 
-A ruthless and profit-driven individual who doesn't care about the NFTREASURE ecosystem or its community.
+A ruthless and profit-driven individual who doesn't care about the tresr ecosystem or its community.
 
 Their sole focus is to extract as much value from the protocol as possible, without regard for others.
 
@@ -27,7 +27,7 @@ Their sole focus is to extract as much value from the protocol as possible, with
 <br/>
 <div class="image-center">
     <img
-      src="/img/nftreasure/dumper.png"
+      src="/img/tresr/dumper.png"
       alt="Dumper"
       class="responsive-image"
       style="--image-width: 50%; --image-height: 50%;"

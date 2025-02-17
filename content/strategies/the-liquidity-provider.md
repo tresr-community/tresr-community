@@ -12,7 +12,7 @@ next_page: "/strategies/hybrid"
 
 #### Thesis
 
-A time-constrained, long-term thinker who believes in NFTREASURE's potential to become self-sustaining and profitable.
+A time-constrained, long-term thinker who believes in tresr's potential to become self-sustaining and profitable.
 
 Despite their busy schedule, they aim to passively accumulate $TRESR earning their rewards as a liquidity provider.
 
@@ -26,14 +26,14 @@ Despite their busy schedule, they aim to passively accumulate $TRESR earning the
 
 Sub-classes of this strategy include:
 
-**The Voter:** This Liquidity Provider stakes a portion of their rewards to accrue veTRESR, enabling them to participate in governance and decision-making within the NFTREASURE ecosystem.
+**The Voter:** This Liquidity Provider stakes a portion of their rewards to accrue veTRESR, enabling them to participate in governance and decision-making within the tresr ecosystem.
 
-**Diamond Hands:** This Liquidity Provider maximizes the percentage of rewards reinvested into LP, compounding their liquidity into a massive pot, and demonstrating their unwavering commitment to the NFTREASURE project.
+**Diamond Hands:** This Liquidity Provider maximizes the percentage of rewards reinvested into LP, compounding their liquidity into a massive pot, and demonstrating their unwavering commitment to the tresr project.
 
 <br/>
 <div class="image-center">
     <img
-      src="/img/nftreasure/liquidity_provider.png"
+      src="/img/tresr/liquidity_provider.png"
       alt="Liquidity Provider"
       class="responsive-image"
       style="--image-width: 25%; --image-height: 25%;"

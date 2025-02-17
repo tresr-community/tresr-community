@@ -20,7 +20,7 @@ from the exhilarating highs of bull markets to the heart-wrenching lows of bear 
 
 He's a true survivor, having aped his way from humble beginnings to the top of the financial food chain and back again.
 
-Nowadays, Ron Jay spends his time sharing his wisdom with the NFTREASURE community. He's the go-to guy for the best strategies to make bank in the ever-changing world of crypto.
+Nowadays, Ron Jay spends his time sharing his wisdom with the tresr community. He's the go-to guy for the best strategies to make bank in the ever-changing world of crypto.
 
 With his wealth of experience and uncanny ability to adapt, Ron Jay is the ultimate shepherd for those looking to navigate the treacherous waters of the digital financial frontier.
 

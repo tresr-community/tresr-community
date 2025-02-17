@@ -8,7 +8,6 @@
   ];
 
   devPackages = with pkgs; [
-    direnv
     figlet
     git
     hugo
@@ -16,18 +15,18 @@
     yq-go
   ];
 in {
-  name = "nftreasure-community";
+  name = "tresr community";
 
   env = {
-    PROJECT = "nftreasure-community";
+    PROJECT = config.name;
   };
 
   cachix = {
     pull = [
       "pre-commit-hooks"
-      "nftreasure-community"
+      "tresr-community"
     ];
-    push = "nftreasure-community";
+    push = "tresr-community";
   };
 
   devenv = {
@@ -300,23 +299,15 @@ in {
           extensions = [
             "arrterian.nix-env-selector"
             "esbenp.prettier-vscode"
-            "exiasr.hadolint"
-            "github.copilot"
-            "github.copilot-chat"
             "github.vscode-github-actions"
             "golang.go"
             "gruntfuggly.todo-tree"
             "johnpapa.vscode-peacock"
-            "kamadorueda.alejandra"
             "mkhl.direnv"
-            "ms-azuretools.vscode-docker"
-            "ms-kubernetes-tools.vscode-kubernetes-tools"
-            "ms-vscode.makefile-tools"
             "nhoizey.gremlins"
             "pinage404.nix-extension-pack"
             "redhat.vscode-yaml"
             "streetsidesoftware.code-spell-checker"
-            "supermaven.supermaven"
             "tekumura.typos-vscode"
             "timonwong.shellcheck"
             "tuxtina.json2yaml"

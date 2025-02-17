@@ -44,4 +44,4 @@ Meet Ron Jay, the ultimate crypto native & reformed degenerate.
 
 He's a true survivor, having aped his way from rags to riches & back again.
 
-Now, he shares his wisdom with the NFTREASURE community, helping others make bank in the digital financial frontier.
+Now, he shares his wisdom with the tresr community, helping others make bank in the digital financial frontier.

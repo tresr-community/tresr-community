@@ -14,7 +14,7 @@ next_page: "/"
 contact_info:
   - name: "Email"
     id: "Send us an email"
-    action: "mailto:contact@nftreasure.community"
+    action: "mailto:contact@tresr.community"
     icon: "tf-envelope2"
 
   - name: "Phone"
@@ -29,7 +29,7 @@ contact_info:
 
   - name: "Chat"
     id: "Chat with Ron Jay"
-    action: "https://chat.nftreasure.community"
+    action: "https://chat.tresr.community"
     icon: "tf-chat"
 
 #########################
