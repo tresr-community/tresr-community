@@ -91,10 +91,11 @@ in
     excludes = [
       ".direnv/"
       ".git/"
-      ".vscode/"
       ".target/"
-      "vendor/"
+      ".vscode/"
+      "static/"
       "themes/"
+      "vendor/"
     ];
     hooks = {
       actionlint.enable = true;
@@ -124,7 +125,7 @@ in
         settings = {
           configuration = {
             MD013 = {
-              line_length = 200;
+              line_length = 250;
             };
             MD033 = {
               allowed_elements = [
@@ -133,6 +134,7 @@ in
                 "nobr"
                 "pre"
                 "sup"
+                "div"
               ];
             };
           };
@@ -172,7 +174,13 @@ in
       statix.enable = true;
       trim-trailing-whitespace.enable = true;
       trufflehog.enable = true;
-      typos.enable = true;
+      typos = {
+        enable = true;
+        settings = {
+          configPath = ".typos.toml";
+          exclude = "static/**";
+        };
+      };
       yamllint = {
         enable = true;
         settings = {
