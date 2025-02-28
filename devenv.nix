@@ -3,18 +3,23 @@
   config,
   lib,
   ...
-}: let
-  packages = with pkgs; [
-  ];
+}:
+let
+  packages =
+    with pkgs;
+    [
+    ];
 
   devPackages = with pkgs; [
     figlet
     git
     hugo
     jq
+    wrangler
     yq-go
   ];
-in {
+in
+{
   name = "tresr community";
 
   env = {
@@ -38,27 +43,43 @@ in {
     disableHint = false;
   };
 
-  packages =
-    packages
-    ++ lib.optionals (!config.container.isBuilding) devPackages;
+  packages = packages ++ lib.optionals (!config.container.isBuilding) devPackages;
 
   enterShell = ''
-    figlet -f starwars -w 120 $PROJECT
+    figlet -f starwars -w 180 $PROJECT
 
-    echo Hello ''${USER:-user}, welcome to the $PROJECT project
+    hello --greeting="Hello ''${USER:-user}, welcome to the $PROJECT project!"
+
+    echo ""
+    echo "#########################"
+    echo "#### Helper scripts #####"
+    echo "#########################"
+    echo "🦾"
+    ${pkgs.gnused}/bin/sed -e 's| |••|g' -e 's|=| |' <<EOF | ${pkgs.util-linuxMinimal}/bin/column -t | ${pkgs.gnused}/bin/sed -e 's|^|🦾 |' -e 's|••| |g'
+    ${lib.generators.toKeyValue { } (lib.mapAttrs (_name: value: value.description) config.scripts)}
+    EOF
+    echo "🦾"
+    echo "#########################"
   '';
 
   languages = {
     nix = {
       enable = true;
     };
-
     shell = {
       enable = true;
     };
-
     go = {
       enable = true;
+    };
+    javascript = {
+      enable = true;
+      bun = {
+        enable = true;
+      };
+      npm = {
+        enable = true;
+      };
     };
   };
 
@@ -66,206 +87,92 @@ in {
     enable = true;
   };
 
-  pre-commit = {
-    default_stages = [
-      "pre-commit"
+  git-hooks = {
+    excludes = [
+      ".direnv/"
+      ".git/"
+      ".vscode/"
+      ".target/"
+      "vendor/"
+      "themes/"
     ];
-
-    excludes = [];
-
     hooks = {
-      actionlint = {
-        enable = true;
-      };
-
-      alejandra = {
-        enable = true;
-        fail_fast = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
-      };
-
-      check-json = {
-        enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
-      };
-
-      check-shebang-scripts-are-executable = {
-        enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
-      };
-
-      check-symlinks = {
-        enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
-      };
-
-      check-yaml = {
-        enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
-      };
-
-      convco = {
-        enable = true;
-      };
-
-      cspell = {
+      actionlint.enable = true;
+      cargo-check.enable = false;
+      check-json.enable = true;
+      check-merge-conflicts.enable = true;
+      check-shebang-scripts-are-executable.enable = true;
+      check-symlinks.enable = true;
+      check-yaml.enable = true;
+      clippy = {
         enable = false;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
+        settings = {
+          denyWarnings = true;
+          offline = true;
+          allFeatures = true;
+          #extraArgs = "--target wasm32-unknown-unknown";
+        };
       };
-
-      deadnix = {
-        enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
-      };
-
-      dialyzer = {
-        enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
-      };
-
-      editorconfig-checker = {
-        enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
-      };
-
-      hadolint = {
-        enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
-      };
-
+      commitizen.enable = true;
+      convco.enable = true;
+      deadnix.enable = true;
+      dialyzer.enable = true;
+      editorconfig-checker.enable = true;
+      gptcommit.enable = true;
       markdownlint = {
         enable = true;
         settings = {
           configuration = {
             MD013 = {
-              line_length = 240;
+              line_length = 200;
             };
-            MD033 = false;
+            MD033 = {
+              allowed_elements = [
+                "a"
+                "br"
+                "nobr"
+                "pre"
+                "sup"
+              ];
+            };
           };
         };
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
       };
-
-      nil = {
-        enable = false;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
-      };
-
-      pre-commit-hook-ensure-sops = {
-        enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
-      };
-
+      mixed-line-endings.enable = true;
+      nixfmt-rfc-style.enable = true;
+      pre-commit-hook-ensure-sops.enable = true;
       prettier = {
         enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
         settings = {
-          no-bracket-spacing = true;
-          print-width = 120;
-          allow-parens = "always";
+          configPath = ".prettierrc.yaml";
         };
       };
-
       pretty-format-json = {
-        enable = true;
+        enable = false;
         excludes = [
-          "vendor/"
-          "themes/"
+          "workers/.*/package.json"
+          "workers/.*/package-lock.json"
         ];
       };
-
+      revive = {
+        enable = true;
+        fail_fast = false;
+      };
       ripsecrets = {
         enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
+        excludes = [ ];
       };
-
+      rustfmt.enable = true;
       shellcheck = {
         enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
+        excludes = [ ];
       };
-
-      shfmt = {
-        enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
-      };
-
-      staticcheck = {
-        enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
-      };
-
-      trim-trailing-whitespace = {
-        enable = true;
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
-      };
-
-      typos = {
-        enable = true;
-        excludes = [
-          "_vendor/"
-          "vendor/"
-          "themes/"
-          "static/"
-        ];
-      };
-
+      shfmt.enable = true;
+      staticcheck.enable = true;
+      statix.enable = true;
+      trim-trailing-whitespace.enable = true;
+      trufflehog.enable = true;
+      typos.enable = true;
       yamllint = {
         enable = true;
         settings = {
@@ -276,10 +183,6 @@ in {
               indentation: enable
           '';
         };
-        excludes = [
-          "vendor/"
-          "themes/"
-        ];
       };
     };
   };
