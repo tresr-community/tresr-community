@@ -4,23 +4,23 @@
 
 favicon: img/favicon.png
 
-logo: img/NFTREASURE.png
+logo: img/tresr.png
 
 dark_mode: true
 
 preloader: true
 
-homepage_content: "The NFTREASURE Community Website"
+homepage_content: "The tresr community website"
 
 homepage_background: "/img/banner.jpg"
 
-description: "NFTREASURE Community Website"
+description: "tresr community website"
 
-author: "NFTREASURE Community"
+author: "tresr community"
 
-contact_form_action: "https://airform.io/contact@nftreasure.community"
+contact_form_action: "https://airform.io/contact@tresr.community"
 
-copyright: "NFTREASURE Community"
+copyright: "tresr community"
 
 plugins:
   css:

@@ -23,7 +23,7 @@ A skilled chart reader and market analyst who prefers the fast-paced world of tr
 <br/>
 <div class="image-center">
     <img
-      src="/img/nftreasure/trader.png"
+      src="/img/tresr/trader.png"
       alt="Trader"
       class="responsive-image"
       style="--image-width: 25%; --image-height: 25%;"

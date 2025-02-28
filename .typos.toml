@@ -1,11 +1,24 @@
 [default]
 
 locale = "en-au"
-
 extend-ignore-re = [
-    "TRESR",
-    "SMRTR",
+  # spellchecker:disable-line
+  "(?Rm)^.*(#|//)\\s*spellchecker:disable-line$"
 ]
+
+[default.extend-words]
+
+center = "center"
+customizations = "customizations"
+customizing = "customizing"
+humanize = "humanize"
+maximize = "maximize"
+maximizes = "maximizes"
+maximizing = "maximizing"
+prioritizing = "prioritizing"
+recognize = "recognize"
+synchronize = "synchronize"
+initializing = "initializing"
 
 [files]
 
@@ -16,7 +29,7 @@ extend-exclude = [
   "_vendor",
   "go.mod",
   "go.sum",
-  "static",
-  "themes",
-  "vendor",
+  "static/**",
+  "themes/**",
+  "vendor/**",
 ]

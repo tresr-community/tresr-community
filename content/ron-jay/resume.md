@@ -39,7 +39,7 @@ experiences:
 
   experience:
     - icon: "tf-documents5"
-      name: "NFTREASURE"
+      name: "tresr"
       duration: "2024 - Present"
       description: "Sharing wisdom and helping others navigate the treacherous waters of the digital financial frontier"
 

@@ -5,7 +5,7 @@
 chatbot:
   enabled: false
 
-  url: "https://preview.chatbot.nftreasure.community/static/js/widget.js"
+  url: "https://preview.chatbot.tresr.community/static/js/widget.js"
   style: dark
   api:
     version: v1

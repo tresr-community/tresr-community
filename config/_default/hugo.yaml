@@ -2,7 +2,7 @@
 # Hugo
 ##################################################
 
-title: NFTREASURE Community
+title: tresr community
 
 theme: phantom-hugo
 
@@ -16,7 +16,7 @@ paginate: 6
 # post excerpt, see https://gohugo.io/content-management/excerpts/
 summaryLength: 10
 
-googleAnalytics: ""
+#googleAnalytics: ""
 
 disqusShortname: ""
 

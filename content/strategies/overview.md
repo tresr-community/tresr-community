@@ -1,5 +1,5 @@
 ---
-title: "NFTREASURE Strategies"
+title: "tresr Strategies"
 watermark: "Strategies"
 description: "Strategies from community gigabrains."
 layout: "strategies"

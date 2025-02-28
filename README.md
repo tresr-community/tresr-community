@@ -1,8 +1,8 @@
-# NFTREASURE community
+# tresr community
 
-Welcome to the NFTREASURE community website, an **unofficial** fan-made project that showcases projects built by NFTREASURE community members.
+Welcome to the tresr community website, an **unofficial** fan-made project that showcases projects built by tresr community members.
 
-**DISCLAIMER:** _This project is in no-way officially endorsed or affiliated with [NFTREASURE](https://nftreasure.com/) and is purely a fan-made project._
+**DISCLAIMER:** _This project is in no-way officially endorsed or affiliated with [tresr](https://tresr.io/) and is purely a fan-made project._
 
 ## Contributing
 
@@ -10,8 +10,8 @@ Contributions are welcome and encouraged! 🥳
 
 ## Links
 
-- [Preview](https://preview.nftreasure.community)
-- [Production](https://nftreasure.community)
+- [Preview](https://preview.tresr.community)
+- [Production](https://tresr.community)
 
 ## Development
 
@@ -46,7 +46,10 @@ open http://localhost:1313/
 
 ```bash
 # Update Go
+rm -rf _vendor
+hugo mod clean --all
 hugo mod get -u ./...
+hugo mod tidy
 hugo mod vendor
 ```
 

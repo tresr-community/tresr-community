@@ -27,7 +27,7 @@ In essence, Commissioner Gordon is a savvy and determined persona in the NFT wor
 <br/>
 <div class="image-center">
     <img
-      src="/img/nftreasure/commissioner.png"
+      src="/img/tresr/commissioner.png"
       alt="Commissioner Gordon"
       class="responsive-image"
       style="--image-width: 25%; --image-height: 25%;"

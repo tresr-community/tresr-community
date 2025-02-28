@@ -2,17 +2,22 @@
 ##################################################
 # Name: pages.yaml
 # Description:
-#   A Workflow that builds a static website using
-#   Hugo before publishing to Cloudflare Pages
+#   A Workflow that publishes Cloudflare Pages using Wrangler.
 ##################################################
 
-name: Pages
+name: Cloudflare Pages
 
-on:
+# prettier-ignore
+on:  # yamllint disable-line rule:truthy
+  # Automatically run anytime there
+  # is a push to the default branch
   push:
     branches:
       - trunk
 
+  # Automatically run anytime a PR
+  # targets the default branch
+  # for the defined types.
   pull_request:
     branches:
       - trunk
@@ -22,6 +27,16 @@ on:
       - synchronize
       - ready_for_review
       - review_requested
+
+  # Re-build every week to ensure
+  # the workers still builds as external
+  # dependencies change.
+  schedule:
+    - cron: "0 0 * * 0"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 permissions:
   contents: read
@@ -35,30 +50,41 @@ defaults:
     shell: bash
 
 env:
+  # Cloudflare account details.
+  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+  CLOUDFLARE_TOKEN_WRANGLER: ${{ secrets.CLOUDFLARE_WORKERS_TOKEN }}
+  CLOUDFLARE_R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  CLOUDFLARE_R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+
+  PAGES_PROJECT_NAME: tresr-community
+
+  # Enable or disable Cloudflare KV and R2
+  CLOUDFLARE_KV_ENABLED: FALSE
+  CLOUDFLARE_R2_ENABLED: TRUE
+
+  # GitHUb details.
+  ORGANISATION: ${{ github.repository_owner }}
+  PROJECT: ${{ github.event.repository.name }}
+
   # Works on pushes or PRs
   BRANCH_NAME_CURRENT: ${{ github.head_ref || github.ref_name }}
   BRANCH_NAME_DEFAULT: ${{ github.event.repository.default_branch }}
 
-  HUGO_VERSION: 0.124.1
-
-  PAGES_PROJECT_NAME: website-nftreasure-community
-
-  WRANGLER_API_TOKEN: ${{ secrets.CLOUDFLARE_WORKERS_TOKEN }}
-
 jobs:
   ##################################################
-  # Deploy to Cloudflare Workers using the Wrangler CLI
+  # Build and Deploy Cloudflare Pages and Workers
   ##################################################
 
-  deploy:
-    name: Deploy website
+  wrangler:
+    name: Wrangler Deploy
 
     runs-on: ${{ matrix.os }}
 
-    timeout-minutes: 30
+    timeout-minutes: 60
+    continue-on-error: false
 
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         os:
           - ubuntu-latest
@@ -68,17 +94,37 @@ jobs:
         name: Checkout repository with submodules
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-          submodules: true
           clean: true
+          fetch-depth: 0
+          lfs: false
           persist-credentials: true
+          submodules: recursive
 
-      - id: hugo_install
-        name: Download and Install Hugo
+      - id: install_nix
+        name: "Install Nix ❄️"
+        uses: cachix/install-nix-action@v30
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          enable_kvm: true
+
+      - id: cachix
+        name: "Enable Cachix ❄️"
+        uses: cachix/cachix-action@v15
+        if: vars.CACHIX_CACHE_NAME != ''
+        with:
+          name: ${{ vars.CACHIX_CACHE_NAME }}
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          useDaemon: true
+          skipPush: false
+
+      - id: cache
+        name: Magic Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - id: devenv_install
+        name: Devenv install
         run: |
-          wget https://github.com/gohugoio/hugo/releases/download/v${{ env.HUGO_VERSION }}/hugo_extended_${{ env.HUGO_VERSION }}_linux-amd64.deb
-          sudo dpkg -i hugo_extended_${{ env.HUGO_VERSION }}_linux-amd64.deb
-          hugo version
+          nix profile install --accept-flake-config nixpkgs#devenv
 
       - id: hugo_cleanup
         name: Remove unwanted Hugo files before build
@@ -91,6 +137,7 @@ jobs:
 
       - id: hugo_modules
         name: Download Hugo modules
+        shell: devenv shell --quiet bash -- -e {0}
         run: |
           if [[ -f package.json ]]; then
             echo "Running npm install"
@@ -106,6 +153,18 @@ jobs:
           hugo mod get ./...
           hugo mod graph
 
+      - id: get_environment
+        name: Get Environment
+        run: |
+          if [[ "${{ env.BRANCH_NAME_CURRENT }}" == "${{ env.BRANCH_NAME_DEFAULT }}" ]];
+          then
+            echo "Environment: Production"
+            echo "WRANGLER_ENVIRONMENT=production" >> "${GITHUB_OUTPUT}"
+          else
+            echo "Environment: Preview"
+            echo "WRANGLER_ENVIRONMENT=preview" >> "${GITHUB_OUTPUT}"
+          fi
+
       #########################
       # Preview
       #########################
@@ -113,24 +172,13 @@ jobs:
       - id: hugo_build_preview
         name: Build the website using Hugo (Preview)
         if: env.BRANCH_NAME_CURRENT != env.BRANCH_NAME_DEFAULT
+        shell: devenv shell --quiet bash -- -e {0}
         env:
           TZ: "Australia/Sydney"
         run: |
-          hugo --verbose --gc --minify --cleanDestinationDir --environment preview
+          hugo --gc --minify --cleanDestinationDir --environment preview
           touch public/.nojekyll
           ls -la public/
-
-      - id: publish_website_preview
-        name: Publish to Cloudflare Pages (Preview)
-        if: ${{ env.BRANCH_NAME_CURRENT != env.BRANCH_NAME_DEFAULT }}
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_PAGES_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ env.PAGES_PROJECT_NAME }}
-          directory: public
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          branch: preview
 
       #########################
       # Production
@@ -139,73 +187,25 @@ jobs:
       - id: hugo_build_production
         if: env.BRANCH_NAME_CURRENT == env.BRANCH_NAME_DEFAULT
         name: Build the website using Hugo (Production)
+        shell: devenv shell --quiet bash -- -e {0}
         env:
           TZ: "Australia/Sydney"
         run: |
-          hugo --verbose --gc --minify --cleanDestinationDir --environment production
+          hugo --gc --minify --cleanDestinationDir --environment production
           touch public/.nojekyll
           ls -la public/
 
-      - id: publish_website_production
-        name: Publish to Cloudflare Pages (Production)
-        if: ${{ env.BRANCH_NAME_CURRENT == env.BRANCH_NAME_DEFAULT }}
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_PAGES_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ env.PAGES_PROJECT_NAME }}
-          directory: public
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          branch: production
-
       #########################
-      # Info
+      # Deploy
       #########################
 
-      - id: cloudflare_pages_info
-        name: Cloudflare Pages Info
-        run: |
-          echo ""
-          echo "##### Preview ######"
-          echo "ID: ${{ steps.publish_website_preview.outputs.id }}"
-          echo "URL: ${{ steps.publish_website_preview.outputs.url }}"
-          echo "Alias: ${{ steps.publish_website_preview.outputs.alias }}"
-          echo "Environment: ${{ steps.publish_website_preview.outputs.environment }}"
-          echo ""
-          echo "##### Production ######"
-          echo "ID: ${{ steps.publish_website_production.outputs.id }}"
-          echo "URL: ${{ steps.publish_website_production.outputs.url }}"
-          echo "Alias: ${{ steps.publish_website_production.outputs.alias }}"
-          echo "Environment: ${{ steps.publish_website_production.outputs.environment }}"
-
-  ##################################################
-  # Giphy thumbs up or down
-  ##################################################
-
-  check:
-    name: PR Status Checks
-
-    if: |
-      github.event_name == 'pull_request' &&
-      github.event.action != 'ready_for_review' &&
-      github.event.action != 'review_requested'
-
-    runs-on: ${{ matrix.os }}
-
-    timeout-minutes: 30
-
-    strategy:
-      fail-fast: true
-      matrix:
-        os:
-          - ubuntu-latest
-
-    needs: deploy
-
-    steps:
-      - name: PR Status Giphy
-        id: pr-status-giphy
-        uses: dgteixeira/pr-status-giphy-action@v2
+      - id: wrangler_deploy
+        name: Wrangler deploy ${{ steps.get_environment.outputs.WRANGLER_ENVIRONMENT }}
+        shell: devenv shell --quiet bash -- -e {0}
         env:
-          GIPHY_API_KEY: ${{ secrets.GIPHY_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ env.CLOUDFLARE_TOKEN_WRANGLER }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          wrangler pages deploy public \
+            --project-name ${{ env.PAGES_PROJECT_NAME }} \
+            --branch ${{ steps.get_environment.outputs.WRANGLER_ENVIRONMENT }}

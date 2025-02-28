@@ -1,7 +1,7 @@
 ---
 title: "Keys"
 watermark: "Keys"
-description: "The amazing NFTREASURE artwork"
+description: "The amazing tresr artwork"
 layout: "keys"
 weight: 99
 prev_page: "/"

@@ -11,7 +11,7 @@ main:
 
   - name: Marketplace
     pre: tf-basket
-    url: https://nftreasure.gitlab.io/community-marketplace/
+    url: https://tresr.gitlab.io/tradecenter/
     weight: 2
 
   - name: Daycare

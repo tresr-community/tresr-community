@@ -1,7 +1,7 @@
 ---
 title: "The Artist"
 watermark: "The Artist"
-description: "The creative NFTREASURE hunter"
+description: "The creative tresr hunter"
 layout: "strategy"
 weight: 101
 prev_page: "/strategies/overview"
@@ -12,7 +12,7 @@ next_page: "/strategies/commissioner-gordon"
 
 #### Thesis
 
-The Artist is here for the art, but also needs to keep the lights on and pay the rent. They're not just a starving artist, they're a savvy NFTREASURE hunter who knows how to monetize their talent.
+The Artist is here for the art, but also needs to keep the lights on and pay the rent. They're not just a starving artist, they're a savvy tresr hunter who knows how to monetize their talent.
 
 #### Actions
 
@@ -20,12 +20,12 @@ The Artist is here for the art, but also needs to keep the lights on and pay the
 - **Level up** keys to earn up to 40% commission on sales of owned NFTs, because the higher the level, the more treasure.
 - **Sell** NFTs when required, because sometimes you have to let go of your precious creations to make room for more.
 
-**_Dark horse:_** An Artist paired with a Marketer. The ultimate dynamic duo like Batman and Robin. Together, they will conquer NFTREASURE making a name for themselves in the merchandise world.
+**_Dark horse:_** An Artist paired with a Marketer. The ultimate dynamic duo like Batman and Robin. Together, they will conquer tresr making a name for themselves in the merchandise world.
 
 <br/>
 <div class="image-center">
     <img
-      src="/img/nftreasure/designer.png"
+      src="/img/tresr/designer.png"
       alt="Designer"
       class="responsive-image"
       style="--image-width: 25%; --image-height: 25%;"

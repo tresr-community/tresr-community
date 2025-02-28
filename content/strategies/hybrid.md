@@ -24,7 +24,7 @@ Why settle for one persona when you can have the best of all?
 <br/>
 <div class="image-center">
     <img
-      src="/img/nftreasure/hybrid.png"
+      src="/img/tresr/hybrid.png"
       alt="Hybrid"
       class="responsive-image"
       style="--image-width: 25%; --image-height: 25%;"
