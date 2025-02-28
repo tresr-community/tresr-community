@@ -6,17 +6,17 @@ main:
   # Top row (4)
   - name: Calculator
     pre: tf-ion-calculator
-    url: https://tresr.gitlab.io/calculator/
+    url: https://nftreasure.gitlab.io/calculator/
     weight: 1
 
   - name: Marketplace
     pre: tf-basket
-    url: https://tresr.gitlab.io/community-marketplace/
+    url: https://tresr.gitlab.io/tradecenter/
     weight: 2
 
   - name: Daycare
     pre: tf-ion-home
-    url: https://tresr.gitlab.io/daycare-v5/
+    url: https://nftreasure.gitlab.io/daycare-v5/
     weight: 3
 
   - name: Keys
