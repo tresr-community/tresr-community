@@ -137,6 +137,7 @@ jobs:
 
       - id: hugo_modules
         name: Download Hugo modules
+        shell: devenv shell --quiet bash -- -e {0}
         run: |
           if [[ -f package.json ]]; then
             echo "Running npm install"
@@ -171,6 +172,7 @@ jobs:
       - id: hugo_build_preview
         name: Build the website using Hugo (Preview)
         if: env.BRANCH_NAME_CURRENT != env.BRANCH_NAME_DEFAULT
+        shell: devenv shell --quiet bash -- -e {0}
         env:
           TZ: "Australia/Sydney"
         run: |
@@ -185,6 +187,7 @@ jobs:
       - id: hugo_build_production
         if: env.BRANCH_NAME_CURRENT == env.BRANCH_NAME_DEFAULT
         name: Build the website using Hugo (Production)
+        shell: devenv shell --quiet bash -- -e {0}
         env:
           TZ: "Australia/Sydney"
         run: |
