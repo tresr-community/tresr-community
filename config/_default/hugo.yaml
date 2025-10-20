@@ -10,8 +10,8 @@ languageCode: "en-us"
 
 timeZone: Australia/Sydney
 
-# paginate = 6 # see https://gohugo.io/extras/pagination/
-paginate: 6
+pagination:
+  pagerSize: 6
 
 # post excerpt, see https://gohugo.io/content-management/excerpts/
 summaryLength: 10

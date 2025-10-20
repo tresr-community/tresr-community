@@ -5,10 +5,9 @@
   ...
 }:
 let
-  packages =
-    with pkgs;
-    [
-    ];
+  packages = with pkgs; [
+    bashInteractive
+  ];
 
   devPackages = with pkgs; [
     figlet
@@ -28,7 +27,6 @@ in
 
   cachix = {
     pull = [
-      "pre-commit-hooks"
       "tresr-community"
     ];
     push = "tresr-community";
@@ -89,16 +87,13 @@ in
 
   git-hooks = {
     excludes = [
-      ".direnv/"
-      ".git/"
-      ".target/"
-      ".vscode/"
-      "static/"
+      "_vendor/"
       "themes/"
       "vendor/"
     ];
     hooks = {
       actionlint.enable = true;
+      action-validator.enable = true;
       cargo-check.enable = false;
       check-json.enable = true;
       check-merge-conflicts.enable = true;
@@ -151,10 +146,7 @@ in
       };
       pretty-format-json = {
         enable = false;
-        excludes = [
-          "workers/.*/package.json"
-          "workers/.*/package-lock.json"
-        ];
+        excludes = [ ];
       };
       revive = {
         enable = true;

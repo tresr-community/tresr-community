@@ -1,4 +1,11 @@
 ---
+##################################################
+# Name: shipit.yaml
+# Description:
+#   Automatically taking care of chores.
+#   Why? Because YOLO.
+##################################################
+
 name: Ship it
 
 on:
@@ -32,6 +39,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    # Only run for PRs created by Dependabot or GitHub Actions
     if: |
       (github.event_name == 'pull_request_target' &&
        github.event.pull_request.user.login == 'dependabot[bot]') ||
