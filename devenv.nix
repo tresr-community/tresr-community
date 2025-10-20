@@ -88,6 +88,7 @@ in
   git-hooks = {
     excludes = [
       "_vendor/"
+      "themes/"
       "vendor/"
     ];
     hooks = {
