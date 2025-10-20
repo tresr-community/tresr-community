@@ -1,10 +1,15 @@
 ---
-name: Devenv update
+##################################################
+# Name: update.yaml
+# Description: Workflow for Updating Developer Environment
+##################################################
 
-on:
+name: Devenv Update
+
+# prettier-ignore
+on:  # yamllint disable-line rule:truthy
   schedule:
     - cron: "0 0 * * 0"
-
   workflow_dispatch:
 
 concurrency:
@@ -31,13 +36,31 @@ defaults:
     shell: bash
 
 jobs:
-  nix:
-    runs-on: ubuntu-latest
+  ##################################################
+  # Update
+  ##################################################
+
+  update:
+    name: Update
+
+    runs-on: ${{ matrix.os }}
+
+    timeout-minutes: 30
+    continue-on-error: false
+
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - ubuntu-latest
 
     steps:
-      - id: checkout
+      - id: checkout_repository
         name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
+        with:
+          lfs: false
+          submodules: recursive
 
       - id: install_nix
         name: "Install Nix ❄️"
@@ -56,29 +79,35 @@ jobs:
           useDaemon: true
           skipPush: false
 
-      - id: cache
-        name: Magic Nix cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
-
       - id: devenv_install
         name: Devenv install
         run: |
-          nix profile install nixpkgs#devenv
+          nix profile install --accept-flake-config nixpkgs#devenv
+
+      - id: devenv_gc
+        name: Devenv gc
+        run: |
+          devenv gc
 
       - id: devenv_update
         name: Devenv update
         run: |
           devenv update
 
+      - id: devenv_test
+        name: Devenv test
+        run: |
+          devenv test
+
       - id: create_pull_request
         name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "bump devenv.lock"
-          title: "bump devenv.lock"
-          body: "This PR bumps the flake input dependencies"
-          branch: "bump-devenv-lock"
+          commit-message: "chore: Update devenv.lock"
+          title: "chore: Update devenv.lock"
+          body: "This PR updates the devenv input dependencies"
+          branch: "update-devenv-lock"
           base: ${{ env.BRANCH_NAME_DEFAULT }}
           labels: "dependencies"
           assignees: "MAHDTech"
