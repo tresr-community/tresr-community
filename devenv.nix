@@ -86,7 +86,10 @@ in
   };
 
   git-hooks = {
-    excludes = [ ];
+    excludes = [
+      "_vendor/"
+      "vendor/"
+    ];
     hooks = {
       actionlint.enable = true;
       action-validator.enable = true;
