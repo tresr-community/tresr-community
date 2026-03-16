@@ -27,5 +27,3 @@ clean:
   keep:
     - EDITOR
     - USER
-
-impure: true

@@ -1,8 +1,8 @@
-# tresr community
+# TRESR community
 
-Welcome to the tresr community website, an **unofficial** fan-made project that showcases projects built by tresr community members.
+Welcome to the tresr community website, an **unofficial** fan-made project that showcases projects built by TRESR community members.
 
-**DISCLAIMER:** _This project is in no-way officially endorsed or affiliated with [tresr](https://tresr.io/) and is purely a fan-made project._
+**DISCLAIMER:** _This project is in no-way officially endorsed or affiliated with [TRESR](https://tresr.com/) and is purely a fan-made project._
 
 ## Contributing
 
