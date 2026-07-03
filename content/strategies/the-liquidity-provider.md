@@ -8,15 +8,15 @@ prev_page: "/strategies/the-giveaway-junkie"
 next_page: "/strategies/hybrid"
 ---
 
-### The Liquidity Provider
+## The Liquidity Provider
 
-#### Thesis
+### Thesis
 
 A time-constrained, long-term thinker who believes in tresr's potential to become self-sustaining and profitable.
 
 Despite their busy schedule, they aim to passively accumulate $TRESR earning their rewards as a liquidity provider.
 
-#### Actions
+### Actions
 
 - **Purchases** purchases SMRTR, TRESR, and AVAX tokens to create liquidity pairs.
 - **Provides** liquidity to the SMRTR/AVAX pair, earning TRESR as rewards.

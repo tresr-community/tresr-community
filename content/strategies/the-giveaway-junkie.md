@@ -8,13 +8,13 @@ prev_page: "/strategies/the-trader"
 next_page: "/strategies/the-liquidity-provider"
 ---
 
-### The Giveaway Junkie
+## The Giveaway Junkie
 
-#### Thesis
+### Thesis
 
 A prize-hunting, treasure-seeking enthusiast who thrives on the thrill of winning giveaways and contests. Oxygen is optional; the rush of victory is their true sustenance.
 
-#### Actions
+### Actions
 
 - Keeps a **keen-eye** on every tresr-related tweet, with notifications on for any [@0xtresr](https://twitter.com/0xtresr) post.
 - Regularly **rummages** through the tresr Intern's trash can, searching for hidden clues about upcoming giveaways and contests.

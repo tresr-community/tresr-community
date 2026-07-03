@@ -8,13 +8,13 @@ prev_page: "/strategies/the-liquidity-provider"
 next_page: "/strategies/overview"
 ---
 
-### Hybrid
+## Hybrid
 
-#### Thesis
+### Thesis
 
 Why settle for one persona when you can have the best of all?
 
-#### Actions
+### Actions
 
 - **Combine Multiple Personas:** Take the most effective strategies and tactics from each persona and merge them into a powerful hybrid approach.
 - **Maximize Benefits:** Leverage the strengths of each persona to create a well-rounded strategy that covers all bases.

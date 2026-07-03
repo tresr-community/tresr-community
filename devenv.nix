@@ -26,6 +26,7 @@ in
   };
 
   cachix = {
+    enable = false;
     pull = [
       "tresr-community"
     ];
@@ -110,7 +111,12 @@ in
         };
       };
       commitizen.enable = true;
-      convco.enable = true;
+      convco = {
+        enable = true;
+        settings = {
+          configPath = ".versionrc";
+        };
+      };
       deadnix.enable = true;
       dialyzer.enable = true;
       editorconfig-checker.enable = true;
