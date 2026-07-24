@@ -9,7 +9,7 @@ prev_page: "strategies/"
 next_page: "ron-jay/about"
 ---
 
-### _Who is Ron Jay?_ 🤔
+## _Who is Ron Jay?_ 🤔
 
 <br/>
 Meet Ron Jay, the ultimate crypto native and reformed degenerate.

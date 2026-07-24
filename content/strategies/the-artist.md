@@ -8,13 +8,13 @@ prev_page: "/strategies/overview"
 next_page: "/strategies/commissioner-gordon"
 ---
 
-### The Artist
+## The Artist
 
-#### Thesis
+### Thesis
 
 The Artist is here for the art, but also needs to keep the lights on and pay the rent. They're not just a starving artist, they're a savvy tresr hunter who knows how to monetize their talent.
 
-#### Actions
+### Actions
 
 - **Create** as many kick-arse designs as possible and start earning commissions on sales
 - **Level up** keys to earn up to 40% commission on sales of owned NFTs, because the higher the level, the more treasure.

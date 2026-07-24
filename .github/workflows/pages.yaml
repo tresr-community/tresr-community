@@ -123,7 +123,7 @@ jobs:
       - id: devenv_install
         name: Devenv install
         run: |
-          nix profile install --accept-flake-config nixpkgs#devenv
+          nix profile install --accept-flake-config github:cachix/devenv
 
       - id: hugo_cleanup
         name: Remove unwanted Hugo files before build

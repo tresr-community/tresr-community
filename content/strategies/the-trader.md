@@ -8,13 +8,13 @@ prev_page: "/strategies/the-dumper"
 next_page: "/strategies/the-giveaway-junkie"
 ---
 
-### The Trader
+## The Trader
 
-#### Thesis
+### Thesis
 
 A skilled chart reader and market analyst who prefers the fast-paced world of trading to the more leisurely pace of DeFi games.
 
-#### Actions
+### Actions
 
 - **Chart Wizardry:** The Trader can decipher the hidden messages in charts like a seasoned ouija board reader, using their skills to predict market trends and make informed decisions.
 - **Line Drawing Mastery:** With a keen eye for patterns, they can draw lines on charts to identify support and resistance levels, key price points, and potential breakout areas.

@@ -8,15 +8,15 @@ prev_page: "/strategies/the-diamond-hand"
 next_page: "/strategies/the-trader"
 ---
 
-### The Dumper
+## The Dumper
 
-#### Thesis
+### Thesis
 
 A ruthless and profit-driven individual who doesn't care about the tresr ecosystem or its community.
 
 Their sole focus is to extract as much value from the protocol as possible, without regard for others.
 
-#### Actions
+### Actions
 
 - **Dumps** every reward earned, ensuring they don't hold onto any assets that could potentially lose value.
 - **Provides Liquidity** early on in SMRTR/AVAX and TRESR/AVAX liquidity to kickstart the project, but only to serve their own interests.
