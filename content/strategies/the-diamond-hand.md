@@ -8,9 +8,9 @@ prev_page: "/strategies/commissioner-gordon"
 next_page: "/strategies/the-dumper"
 ---
 
-### The Diamond Hand
+## The Diamond Hand
 
-#### Thesis
+### Thesis
 
 The Diamond Hand is a long-term thinker with an unwavering belief in the future success of tresr.
 
@@ -20,7 +20,7 @@ This tresr aficionado has even read the lengthy [360 report](https://www.360rese
 
 This report estimates revenue in the merchandise market will reach a staggering _US $447,164,000_ annually, with an annual growth rate of 5.83% between 2024 and 2028.
 
-#### Actions
+### Actions
 
 - **Accumulate** as much $TRESR as possible, like a digital treasure hunter.
 - **Compound** rewards into a passive income snowball that would make Warren Buffett green with envy.
