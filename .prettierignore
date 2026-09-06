@@ -12,3 +12,6 @@ vendor/
 # HACK: ignore all HTML files
 # pettier is terrible with go templates
 **/*.html
+
+# Go-templated web manifest, prettier parses it as JSON
+**/*.webmanifest
