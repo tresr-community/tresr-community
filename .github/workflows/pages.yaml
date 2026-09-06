@@ -125,6 +125,22 @@ jobs:
         run: |
           nix profile install --accept-flake-config nixpkgs#devenv
 
+      # The Nix daemon has a GC race on fresh stores that intermittently
+      # fails evaluation with "path '/nix/store/...' is not valid"
+      # (cachix/devenv#2729, NixOS/nix#15469). Retrying re-adds the path.
+      - id: devenv_warmup
+        name: Devenv warm up
+        run: |
+          for attempt in 1 2 3; do
+            if devenv --no-tui shell --quiet -- true; then
+              exit 0
+            fi
+            echo "devenv evaluation failed (attempt ${attempt}/3), retrying..."
+            sleep 5
+          done
+          echo "devenv evaluation failed after 3 attempts"
+          exit 1
+
       - id: hugo_cleanup
         name: Remove unwanted Hugo files before build
         run: |
